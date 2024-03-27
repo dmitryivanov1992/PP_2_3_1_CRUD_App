@@ -2,8 +2,6 @@ package ru.dmitryivanov.model;
 
 import javax.persistence.*;
 
-import org.springframework.stereotype.Component;
-
 
 @Entity
 @Table(name = "users")
@@ -68,5 +66,16 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

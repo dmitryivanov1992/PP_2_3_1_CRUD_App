@@ -13,31 +13,30 @@ public class UsersController {
     private final UserService userService;
 
     @Autowired
-    private UsersController(UserService userService) {
+    public UsersController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping()
-    public String carController(Model model) {
+    public String userController(Model model) {
         model.addAttribute("users", userService.listUsers());
-        return "users/index";
+       return "users/index";
     }
 
     @GetMapping("/edit")
-    public String editUser(@RequestParam(required = true) int id, Model model) {
+    public String editUser(@RequestParam int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "users/edit";
     }
 
     @PostMapping("/edit")
-    public String updateUser(@RequestParam(required = true) int id, @ModelAttribute("user") User user) {
-        user.setId(id);
+    public String updateUser(@ModelAttribute("user") User user) {
         userService.editUser(user);
         return "redirect:/users";
     }
 
     @GetMapping("/remove")
-    public String removeUser(@RequestParam(required = true) int id) {
+    public String removeUser(@RequestParam int id) {
         userService.deleteUser(id);
         return "redirect:/users";
     }
